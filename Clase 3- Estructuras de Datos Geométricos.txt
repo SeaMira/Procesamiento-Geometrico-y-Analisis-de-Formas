@@ -1,0 +1,23 @@
+Estructuras de datos para mallas
+
+Necesitamos de una estructura que pueda realizar cálculos/operaciones eficientemente.
+Requerimientos topológicos:
+	Soporte de mallas manifold Y no manifold?
+	Solo mallas trianagulares o de otros tipos?
+
+Estructuras basadas en cara: información básica es el triángulo, se almacena la info de vértices por cada cara
+	-Problemas: alta redundancia (vértices de caras contiguas pueden repetirse)
+				No conectividad: no se guardan aristas en ningún momento
+	En F triángulos se almacenan 9F floats, que son 36 bytes por malla.
+
+Estructura con indexación de cara: Los vértices se almacenan una sola vez, y los índices de los vértices de cada triángulo. Entonces si V son los vértices y F los triángulos, se tendrían 3V floats y 3F índices.
+	Operaciones de conectividad: acceso a vértices, caras y artistas.
+
+Estructura basada en aristas - Winged-Edge
+Vertice: punto, edgeRef.
+Edge: vertexRef (2 vertices), faceRef (2 caras), edgeRef (siguientes 2 aristas), edgeRef (previas 2 aristas). Por lo mismo, si V son vértices, E son aristas y F son caras, entonces El total de bytes son 
+
+Estructura Half-Edge:
+Vertex: punto halfedge
+Face: halfedge
+Halfedge: vertex, face, 3 halfedge (next, prev, opposite)
